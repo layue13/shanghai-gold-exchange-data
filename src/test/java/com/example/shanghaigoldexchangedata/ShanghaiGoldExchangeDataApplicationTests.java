@@ -1,13 +1,14 @@
 package com.example.shanghaigoldexchangedata;
 
 import org.junit.jupiter.api.Test;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.test.context.SpringBootTest;
 
-@SpringBootTest
 class ShanghaiGoldExchangeDataApplicationTests {
 
     @Test
     void contextLoads() {
+        System.out.println(this.getClass().getResource("成交行情.csv").getFile());
     }
 
 }
