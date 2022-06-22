@@ -1,44 +1,25 @@
 package com.example.shanghaigoldexchangedata.dao.impl;
 
 import com.example.shanghaigoldexchangedata.dao.TradeInfoMapper;
+import com.example.shanghaigoldexchangedata.dao.dataprovider.CSVDataProvider;
 import com.example.shanghaigoldexchangedata.model.TradeInfo;
-import de.siegmar.fastcsv.reader.CommentStrategy;
 import de.siegmar.fastcsv.reader.CsvReader;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Repository;
 
-import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
-import java.net.URLDecoder;
-import java.nio.charset.StandardCharsets;
 import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Slf4j
 @Repository
-public class TradeInfoCSVImpl implements TradeInfoMapper {
-    private final SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
-
-    @SneakyThrows
-    public TradeInfoCSVImpl() {
-        log.info(URLDecoder.decode(this.getClass().getResource("/data/成交行情.csv").getFile(), StandardCharsets.UTF_8));
-    }
-
-    public CsvReader getCsvReaderForTradeInfoData() throws FileNotFoundException {
-        return CsvReader.builder()
-                .skipEmptyRows(true)
-                .commentStrategy(CommentStrategy.SKIP)
-                .errorOnDifferentFieldCount(true)
-                .build(new FileReader(URLDecoder.decode(this.getClass().getResource("/data/成交行情.csv").getFile(), StandardCharsets.UTF_8)));
-    }
-
+public class TradeInfoMapperCSVImpl implements TradeInfoMapper {
     @SneakyThrows
     @Override
     public List<TradeInfo> findAll() {
-        CsvReader data = getCsvReaderForTradeInfoData();
+        CsvReader data = CSVDataProvider.getCSVDataByFileName("TransactionData");
         return data
                 .stream()
                 .skip(1)

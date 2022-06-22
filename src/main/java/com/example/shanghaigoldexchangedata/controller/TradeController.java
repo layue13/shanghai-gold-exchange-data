@@ -1,6 +1,7 @@
 package com.example.shanghaigoldexchangedata.controller;
 
 import com.example.shanghaigoldexchangedata.ResponseWrapper;
+import com.example.shanghaigoldexchangedata.model.BenchmarkPrice;
 import com.example.shanghaigoldexchangedata.model.TradeInfo;
 import com.example.shanghaigoldexchangedata.service.TradeInfoService;
 import lombok.extern.slf4j.Slf4j;
@@ -10,14 +11,14 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("metal")
+@RequestMapping("trade")
 @CrossOrigin(
         allowedHeaders = {"*"},
         methods = {RequestMethod.GET,RequestMethod.POST,RequestMethod.OPTIONS},
         origins = {"*"}
 )
 @Slf4j
-public class MetalController {
+public class TradeController {
 
     private TradeInfoService tradeInfoService;
 
@@ -28,7 +29,6 @@ public class MetalController {
 
     @GetMapping("tradeInfo")
     public ResponseWrapper<List<TradeInfo>> getTradeInfo(String contract) {
-        log.info(contract);
         if (contract == null) {
             return new ResponseWrapper<>("200", tradeInfoService.getAllTradeInfo());
         }
@@ -45,5 +45,8 @@ public class MetalController {
         return new ResponseWrapper<>("200",tradeInfoService.getSortedDate());
     }
 
-
+    @GetMapping("getGoldBenchMarkPrice")
+    public ResponseWrapper<List<BenchmarkPrice>> getGoldBenchMarkPrice(){
+        return null;
+    }
 }

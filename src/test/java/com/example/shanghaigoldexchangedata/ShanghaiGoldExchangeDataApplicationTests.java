@@ -8,7 +8,7 @@ class ShanghaiGoldExchangeDataApplicationTests {
 
     @Test
     void contextLoads() {
-        System.out.println(this.getClass().getResource("成交行情.csv").getFile());
+        System.out.println(this.getClass().getResource("TransactionData.csv").getFile());
     }
 
 }

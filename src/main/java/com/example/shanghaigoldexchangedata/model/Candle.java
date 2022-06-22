@@ -7,7 +7,7 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class OHLCEntry {
+public class Candle {
     private String date;
     private double open;
     private double close;
